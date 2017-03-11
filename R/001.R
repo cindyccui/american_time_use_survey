@@ -107,7 +107,7 @@ dt_melted <- melt(
   variable.name = 'Category', value.name = 'Minutes',
   variable.factor = FALSE)
 
-
+dt_melted_aggr <- dt_melted[, .(Minutes = mean(Minutes)), by = .(Age, Day_of_week, Working_day, Year, Category)]
 
 # By Age ------------------------------------------------------------------
 
@@ -132,7 +132,8 @@ dt_melted <- melt(
 
 # Save --------------------------------------------------------------------
 
-fwrite(dt,        file.path('data', 'atussum_cooked.csv'))
-fwrite(dt_melted, file.path('data', 'atussum_cooked_melted.csv'))
+fwrite(dt,             file.path('data', 'atussum_cooked.csv'))
+fwrite(dt_melted,      file.path('data', 'atussum_cooked_melted.csv'))
+fwrite(dt_melted_aggr, file.path('data', 'atussum_cooked_melted_aggr.csv'))
 
 
